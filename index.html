@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big Bird - Trendy Fashion Brand</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff8c00;
+        }
+
+        .logo span {
+            font-size: 1.5rem;
+            color: black;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ff8c00;
+        }
+        
+        .cart-btn {
+            background: #ff8c00;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .cart-btn:hover {
+            background: #e67e00;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            background-image: url(log.jpg);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-btn {
+            background: #ff8c00;
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .hero-btn:hover {
+            background: #e67e00;
+        }
+        
+        /* Categories Section */
+        .categories {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+        }
+        
+        .section-title span {
+            color: #ff8c00;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .category-card {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .category-content {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.9);
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .category-content h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .shop-now {
+            color: #ff8c00;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        /* Featured Products */
+        .featured {
+            background: #f9f9f9;
+            padding: 5rem 5%;
+        }
+        
+        .featured-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 1rem;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .price {
+            color: #ff8c00;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .add-to-cart {
+            display: block;
+            width: 100%;
+            padding: 0.5rem;
+            text-align: center;
+            background: #ff8c00;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background: #e67e00;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-img {
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .about-content h2 {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        
+        .about-content h2 span {
+            color: #ff8c00;
+        }
+        
+        .about-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .learn-more {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: #ff8c00;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        .learn-more:hover {
+            background: #e67e00;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background: #333;
+            color: white;
+            padding: 5rem 5%;
+            text-align: center;
+        }
+        
+        .newsletter-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .newsletter h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter p {
+            margin-bottom: 2rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .newsletter-btn {
+            background: #ff8c00;
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .newsletter-btn:hover {
+            background: #e67e00;
+        }
+        
+        /* Footer */
+        footer {
+            background: #222;
+            color: #fff;
+            padding: 3rem 5%;
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 50px;
+            height: 2px;
+            background: #ff8c00;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: #ff8c00;
+            padding-left: 5px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            color: #fff;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #ff8c00;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            nav ul li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 4px;
+                margin-bottom: 1rem;
+            }
+            
+            .newsletter-btn {
+                border-radius: 4px;
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">Big Bird<span> Stay Fly</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#featured">Featured</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+            <button class="cart-btn">Cart (0)</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Wear Your Style and Stay Fly</h1>
+        <p>Discover the latest trends in fashion with Big Bird's exclusive collection of apparel and accessories.</p>
+        <a href="#categories" class="hero-btn">Shop Now</a>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <h2 class="section-title">Our <span>Categories</span></h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <img src="sh.jpg" alt="T-Shirts">
+                <div class="category-content">
+                    <h3>T-Shirts</h3>
+                    <a href="#" class="shop-now">Shop Now</a>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="hat.jpg" alt="Hats">
+                <div class="category-content">
+                    <h3>Hats</h3>
+                    <a href="#" class="shop-now">Shop Now</a>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="top.jpg" alt="Women's Top Wear">
+                <div class="category-content">
+                    <h3>Women's Top Wear</h3>
+                    <a href="#" class="shop-now">Shop Now</a>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="bag.jpg" alt="Bags">
+                <div class="category-content">
+                    <h3>Bags</h3>
+                    <a href="#" class="shop-now">Shop Now</a>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="men.jpg" alt="Accessories">
+                <div class="category-content">
+                    <h3>Men's Shirt</h3>
+                    <a href="#" class="shop-now">Shop Now</a>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="fem.jpg" alt="Accessories">
+                <div class="category-content">
+                    <h3>Women</h3>
+                    <a href="#" class="shop-now">Shop Now</a>
+                </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured" id="featured">
+        <div class="featured-container">
+            <h2 class="section-title">Featured <span>Products</span></h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="her.jpg" alt="Graphic T-Shirt">
+                    </div>
+                    <div class="product-info">
+                        <h3>High Quality T-Shirt</h3>
+                        <div class="price">$20</div>
+                        <button class="add-to-cart">Click to Purchase</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="ha.jpg" alt="Bucket Hat">
+                    </div>
+                    <div class="product-info">
+                        <h3>Summer Bucket Hat</h3>
+                        <div class="price">$10</div>
+                        <button class="add-to-cart">Click to Purchase</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="ele.jpg" alt="Women's Blouse">
+                    </div>
+                    <div class="product-info">
+                        <h3>Elegant Blouse</h3>
+                        <div class="price">$20</div>
+                        <button class="add-to-cart">Click to Purchase</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="cov.jpg" alt="Tote Bag">
+                    </div>
+                    <div class="product-info">
+                        <h3>Classical Shirts</h3>
+                        <div class="price">$20</div>
+                        <button class="add-to-cart">Click to Purchase</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-img">
+            <img src="al.jpg" alt="About Big Bird">
+        </div>
+        <div class="about-content">
+            <h2>About <span>Big Bird</span></h2>
+            <p>Big Bird is a trendy fashion brand in Liberia dedicated to bringing you high-quality, stylish clothing and accessories at affordable prices. Founded in 2022, we've quickly grown to become a favorite among fashion enthusiasts.</p>
+            <p>Our mission is to help you express your unique style through our carefully curated collections. We believe fashion should be fun, accessible, and sustainable.</p>
+            <a href="#" class="learn-more">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h2>Subscribe to Our Page</h2>
+            <p>Stay updated with our latest collections and exclusive offers.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email">
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+            <small>By subscribing, you agree to our Terms and Privacy Policy.</small>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Big Bird Stay Fly</h3>
+                <p>Fashion that speaks to your personality.</p>
+                <div class="social-links">
+                    <a href="#">F</a>
+                    <a href="#">T</a>
+                    <a href="#">I</a>
+                    <a href="#">P</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="#">T-Shirts</a></li>
+                    <li><a href="#">Hats</a></li>
+                    <li><a href="#">Women's Top Wear</a></li>
+                    <li><a href="#">Bags</a></li>
+                    <li><a href="#">Accessories</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Help</h3>
+                <ul>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Order</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Information</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Big Bird. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
